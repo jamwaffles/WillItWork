@@ -75,7 +75,7 @@ function bundleCompile(options) {
 		noParse: [ 'q', 'lodash', 'backbone' ]
 	})
 
-	b.transform(babelify)
+	b.transform(babelify.configure({ optional: [ 'es7.classProperties' ] }))
 
 	if(options.watch) {
 		b = watchify(b)
@@ -103,7 +103,7 @@ gulp.task('watchify', "Watch any JS/JSX files for changes and automatically rebu
 
 gulp.task('default', "Default build task. Creates everything needed to run the app", [ 'less', 'browserify' ])
 
-gulp.task('less', "Compile LESS files into CSS, copy images and fonts to public/", [ /*'copy-images'*/, 'copy-fonts' ], function() {
+gulp.task('less', "Compile LESS files into CSS, copy images and fonts to public/", [ /*'copy-images',*/ 'copy-fonts' ], function() {
 	var opts = {}
 
 	if(isProduction) {
@@ -117,7 +117,7 @@ gulp.task('less', "Compile LESS files into CSS, copy images and fonts to public/
 	return lessCompile(opts)
 })
 
-gulp.task('watch', "Run various watch commands to automatically rebuild when files change", [ 'less', /*'copy-images'*/, 'watchify' ], function() {
+gulp.task('watch', "Run various watch commands to automatically rebuild when files change", [ 'less', /*'copy-images',*/ 'watchify' ], function() {
 	gulp.watch('less/**/*.less', [ 'less' ])
 	gulp.watch('images/**/*', [ 'copy-images' ])
 })
@@ -126,8 +126,8 @@ gulp.task('copy-fonts', "Copy fonts to their dist folder", function() {
 	gulp.src('node_modules/font-awesome/fonts/*', { base: 'node_modules/font-awesome/fonts' }).pipe(gulp.dest(paths.fonts))
 })
 
-// gulp.task(/*'copy-images'*/, "Copy images to their dist folder", function() {
+// gulp.task('copy-images', "Copy images to their dist folder", function() {
 // 	return gulp.src('images/**/*.{jpg,png,gif,svg,ico}').pipe(gulp.dest('public/img'))
 // })
 
-gulp.task('build-assets', "Build folder of static assets", [ /*'copy-images'*/, 'browserify', 'less' ])
+gulp.task('build-assets', "Build folder of static assets", [ /*'copy-images',*/ 'browserify', 'less' ])
