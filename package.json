@@ -24,8 +24,9 @@
     "koa-body": "^1.2.0",
     "koa-favi": "^0.1.0",
     "koa-router": "^4.3.2",
-    "koa-static": "^1.4.9",
+    "koa-static-cache": "^3.1.0",
     "less": "^2.5.0",
+    "lodash": "^3.6.0",
     "react": "^0.13.1",
     "react-async": "^2.1.0",
     "react-router-component": "^0.24.4"
